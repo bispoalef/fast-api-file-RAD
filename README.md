@@ -29,4 +29,30 @@ Clone o repositório:
 
 ```bash
 git clone https://github.com/seu-usuario/fast-api-file-RAD.git
-cd fast-api-file-RAD
+cd fast-api-file-RA
+```
+Crie e ative um ambiente virtual:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+Instale as dependências:
+
+```bash
+pip install -r requirements.txt
+```
+Inicie o servidor:
+
+```bash
+uvicorn main:app --reload
+```
+
+Uso
+Após iniciar o servidor, a API estará disponível em http://localhost:8000. A documentação interativa pode ser acessada em http://localhost:8000/docs.
+
+Contribuição
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
+
+Licença
+Este projeto é licenciado sob a MIT License.
