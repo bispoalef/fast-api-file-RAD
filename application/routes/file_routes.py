@@ -1,4 +1,4 @@
-from fastapi import APIRouter, UploadFile, File
+from fastapi import APIRouter, Path, UploadFile, File
 
 from domain.file_processor import FileProcessor
 
@@ -26,5 +26,5 @@ async def delete_data():
 
 
 @router.get("/list_files/{file_name}")
-def list_files(file_name: str):
+def list_files(file_name: str = Path(..., example="seu_file.csv", description="Nome do arquivo a ser listado")):
     return FileProcessor().list_files(file_name)
