@@ -25,6 +25,6 @@ async def delete_data():
     return {"message": "Dado removido com sucesso"}
 
 
-@router.get("/file/list_files")
-async def list_files():
-    return {"message": "Lista de dados"}
+@router.get("/list_files/{file_name}")
+def list_files(file_name: str):
+    return FileProcessor().list_files(file_name)

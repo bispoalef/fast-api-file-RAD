@@ -62,3 +62,43 @@ class FileProcessor:
                 status_code=status.HTTP_406_NOT_ACCEPTABLE,
                 detail="Apenas arquivos CSV são aceitos"
             )
+
+
+
+    def list_files(self, file_name: str):
+        """
+        List all lines of a specified file.
+        :param file_name: Name of the file to list lines
+        :return: List of lines in the file
+        """
+        # Construindo o caminho completo do arquivo dinamicamente
+        file_path = os.path.join(self.directory, file_name)
+
+        # Verifica se o arquivo existe
+        if not os.path.exists(file_path):
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                                detail=f"Arquivo {file_name} não encontrado")
+
+        try:
+            # Abre o arquivo e lê todas as linhas
+            with open(file_path, 'r', newline='') as file:
+                lines = file.readlines()
+
+            # Verifica se o arquivo está vazio
+            if not lines:
+                raise HTTPException(status_code=status.HTTP_204_NO_CONTENT,
+                                    detail=f"O arquivo {file_name} está vazio")
+
+            return {"file_name": file_name, "content": lines}
+
+        except FileNotFoundError:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                                detail=f"Arquivo {file_name} não encontrado")
+
+        except PermissionError:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
+                                detail=f"Permissão negada para acessar o arquivo {file_name}")
+
+        except Exception as e:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                                detail=f"Erro ao ler o arquivo {file_name}: {str(e)}")
