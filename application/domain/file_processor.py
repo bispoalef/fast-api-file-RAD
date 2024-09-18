@@ -67,11 +67,11 @@ class FileProcessor:
 
     def list_files(self, file_name: str):
         """
-        List all lines of a specified file.
-        :param file_name: Name of the file to list lines
-        :return: List of lines in the file
+        Listar todas as linhas de um arquivo selecionado.
+        :param file_name: Nome do arquivo a ser listado
+        :return: Todas linhas do arquivo CSV
         """
-        # Construindo o caminho completo do arquivo dinamicamente
+        # Construindo o caminho completo do arquivo a ser aberto
         file_path = os.path.join(self.directory, file_name)
 
         # Verifica se o arquivo existe
